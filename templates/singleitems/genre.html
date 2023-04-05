@@ -1,0 +1,83 @@
+{% include 'top.html' %}
+<div class="content">
+    <div class="container details">
+        <!--  Example of a table with clickable rows:
+        <table class="styled">
+                    <thead>
+                        <tr>
+                            <td>Column 1 Heading - Usually an ID </td>
+                            <td>Column 2 Heading</td>
+                                      .
+                                      .
+                                      .
+                            <td>Column n Heading</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for instance in some_input_array %}
+                        <tr class="clickable-tr" data-href="{{ url_for('single_item_target', target_id=instance.single_item_target_id)}}">
+                            <td style="text-align: center">{{ instance.single_item_target_id }}</td>
+                            <td>{{instance.item_corresponding_to_column_2}}</td>
+                                      .
+                                      .
+                                      .
+                            <td>{{instance.item_corresponding_to_column_n}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+        
+                </table>
+        -->
+        <!-- TODO Query (10) -->
+        <!-- First check should be a valid instance -->
+        <!-- Second check should be what type of genre? -->
+        <h2 class="title"> Media with the same genre </h2>
+        {% if media | length > 0 %}
+            <table class="styled">
+                    <thead>
+                        <tr>
+                            <td>Item ID</td>
+                            <td>Item Title</td>
+                            <td>Item Type</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for instance in media %}
+                            {% if instance.type == 'Song' %}
+                                <!-- Each row is a link to each individual movie page -->
+                                <tr class="clickable-tr" data-href="{{ url_for('single_song', song_id=instance.id)}}">
+                                    <td style="text-align: center">{{ instance.id }}</td>
+                                    <td>{{instance.title}}</td>
+                                    <td>{{instance.type}}</td>
+                                    <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                    <td>{{instance.count}}</td>
+                                </tr>
+
+{#                            </tr>#}
+                                {% elif instance.type == 'Movie' %}
+                                    <tr class="clickable-tr" data-href="{{ url_for('single_movie', movie_id=instance.id)}}">
+                                        <td style="text-align: center">{{ instance.id }}</td>
+                                        <td>{{instance.title}}</td>
+                                        <td>{{instance.type}}</td>
+                                        <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                        <td>{{instance.count}}</td>
+                                  </tr>
+                                {% elif instance.type == 'Podcast' %}
+                                    <tr class="clickable-tr" data-href="{{ url_for('single_podcast', podcast_id=instance.id)}}">
+                                        <td style="text-align: center">{{ instance.id }}</td>
+                                        <td>{{instance.title}}</td>
+                                        <td>{{instance.type}}</td>
+                                        <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                        <td>{{instance.count}}</td>
+                                    </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+        {% else %}
+            <h2 class="title"> Invalid Genre ID</h2>
+        {% endif %}
+    </div>
+</div>
+{% include 'bottom.html'%}

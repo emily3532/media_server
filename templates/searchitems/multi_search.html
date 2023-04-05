@@ -1,0 +1,87 @@
+{% include 'top.html' %}
+    <div class="content">
+        <h1 class="title">Multi Search</h1>
+
+        <!-- Query (9)
+            Search for Movies
+            You need two sections
+            First is a form to take in input
+            Second is a table to display reults
+         -->
+
+            {% if media | length > 0 %}
+                <!-- All Movies -->
+                <table class="styled">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>Media ID</td>
+                            <td>Media Title</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for instance in media %}
+                            {% if instance.type == 'Movie'%}
+                            <!-- Each row is a link to each individual movie page -->
+                            <tr class="clickable-tr" data-href="{{ url_for('single_movie', movie_id=instance.id)}}">
+                                <td style="text-align: left">{{ instance.movie_id }}</td>
+                                <td>{{instance.id}}</td>
+                                <td>{{instance.title}}</td>
+                                <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                <td>{{instance.count}}</td>
+                            </tr>
+                            {% endif %}
+
+                            {% if instance.type == 'Podcast'%}
+                            <!-- Each row is a link to each individual movie page -->
+                            <tr class="clickable-tr" data-href="{{ url_for('single_podcast', podcast_id=instance.id)}}">
+                                <td style="text-align: left">{{ instance.movie_id }}</td>
+                                <td>{{instance.id}}</td>
+                                <td>{{instance.title}}</td>
+                                <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                <td>{{instance.count}}</td>
+                            </tr>
+                            {% endif %}
+
+                            {% if instance.type == 'Album'%}
+                            <!-- Each row is a link to each individual movie page -->
+                            <tr class="clickable-tr" data-href="{{ url_for('single_album', album_id=instance.id)}}">
+                                <td style="text-align: left">{{ instance.movie_id }}</td>
+                                <td>{{instance.id}}</td>
+                                <td>{{instance.title}}</td>
+                                <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                <td>{{instance.count}}</td>
+                            </tr>
+                            {% endif %}
+
+                            {% if instance.type == 'Song'%}
+                            <!-- Each row is a link to each individual movie page -->
+                            <tr class="clickable-tr" data-href="{{ url_for('single_song', song_id=instance.id)}}">
+                                <td style="text-align: left">{{ instance.movie_id }}</td>
+                                <td>{{instance.id}}</td>
+                                <td>{{instance.title}}</td>
+                                <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                <td>{{instance.count}}</td>
+                            </tr>
+                            {% endif %}
+
+                            {% if instance.type == 'Tv Show'%}
+                            <!-- Each row is a link to each individual movie page -->
+                            <tr class="clickable-tr" data-href="{{ url_for('single_tvshow', tvshow_id=instance.id)}}">
+                                <td style="text-align: left">{{ instance.movie_id }}</td>
+                                <td>{{instance.id}}</td>
+                                <td>{{instance.title}}</td>
+                                <!-- Check where this count is coming from? also movie_id isntance might not work -->
+                                <td>{{instance.count}}</td>
+                            </tr>
+                            {% endif %}
+
+
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            {% endif %}
+
+    </div>
+{% include 'bottom.html'%}
